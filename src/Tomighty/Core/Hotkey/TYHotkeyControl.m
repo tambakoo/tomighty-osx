@@ -50,7 +50,7 @@ IB_DESIGNABLE
 {
     if(hotkey.valid) {
         _key = hotkey;
-        [_cell setHotkey:_key];
+        [(TYHotkeyCell *)self.cell setHotkey:_key];
         [self sendAction:self.action to:self.target];
     }
 }
@@ -65,7 +65,7 @@ IB_DESIGNABLE
 - (void)keyDown:(NSEvent *)theEvent
 {
     TYHotkey *key = [TYHotkey hotkeyWithCode:[theEvent keyCode]
-                                         flags:theEvent.modifierFlags];
+                                        flags:(UInt32)theEvent.modifierFlags];
     if(key.valid)
         [self setHotkey:key];
     else

@@ -1,17 +1,29 @@
 #!/usr/bin/env bash
 
-#Use the create-dmg project to create the DMG
-#git clone https://github.com/andreyvit/yoursway-create-dmg.git
+set -e
 
-VERSION="1.3"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TARGET_DIR="$SCRIPT_DIR/target"
+APP_PATH="$TARGET_DIR/Tomighty.app"
+PACKAGE_DIR="$TARGET_DIR/package"
 
-mkdir -p target/package
-cp -rf target/Tomighty.app target/package/
+if [ ! -d "$APP_PATH" ]; then
+  "$SCRIPT_DIR/build.sh"
+fi
 
-yoursway-create-dmg/create-dmg \
-    --volname "Tomighty-$VERSION" \
-    --icon-size 75 \
-    --app-drop-link 10 10 \
-    --icon target/package/Tomighty.app 95 10 \
-    "target/Tomighty-$VERSION.dmg" \
-    target/package
+VERSION="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP_PATH/Contents/Info.plist")"
+DMG_PATH="$TARGET_DIR/Tomighty-$VERSION.dmg"
+
+rm -rf "$PACKAGE_DIR" "$DMG_PATH"
+mkdir -p "$PACKAGE_DIR"
+cp -R "$APP_PATH" "$PACKAGE_DIR/Tomighty.app"
+ln -s /Applications "$PACKAGE_DIR/Applications"
+
+hdiutil create \
+  -volname "Tomighty-$VERSION" \
+  -srcfolder "$PACKAGE_DIR" \
+  -format UDZO \
+  -ov \
+  "$DMG_PATH"
+
+echo "$DMG_PATH"

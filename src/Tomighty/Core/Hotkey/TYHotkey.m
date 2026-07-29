@@ -53,13 +53,13 @@ static NSString* const MVTCommandKeyString = @"⌘";
     for(int i = 0; i < string.length; i++) {
         NSString *s = [string substringWithRange:NSMakeRange(i, 1)];
          if([s isEqualToString:MVTControlKeyString])
-            _flags |= NSControlKeyMask;
+            _flags |= (UInt32)NSEventModifierFlagControl;
         else if([s isEqualToString:MVTAlternativeKeyString])
-            _flags |= NSAlternateKeyMask;
+            _flags |= (UInt32)NSEventModifierFlagOption;
         else if([s isEqualToString:MVTShiftKeyString])
-            _flags |= NSShiftKeyMask;
+            _flags |= (UInt32)NSEventModifierFlagShift;
         else if([s isEqualToString:MVTCommandKeyString])
-            _flags |= NSCommandKeyMask;
+            _flags |= (UInt32)NSEventModifierFlagCommand;
         else {
             NSString *s = [string
                            substringWithRange:NSMakeRange(i, string.length - i)];
@@ -107,22 +107,22 @@ static NSString* const MVTCommandKeyString = @"⌘";
 
 - (BOOL)ctrl
 {
-    return _flags & NSControlKeyMask ? TRUE : FALSE;
+    return _flags & (UInt32)NSEventModifierFlagControl ? TRUE : FALSE;
 }
 
 - (BOOL)alt
 {
-    return _flags & NSAlternateKeyMask ? TRUE : FALSE;
+    return _flags & (UInt32)NSEventModifierFlagOption ? TRUE : FALSE;
 }
 
 - (BOOL)shift
 {
-    return _flags & NSShiftKeyMask ? TRUE : FALSE;
+    return _flags & (UInt32)NSEventModifierFlagShift ? TRUE : FALSE;
 }
 
 - (BOOL)cmd
 {
-    return _flags & NSCommandKeyMask ? TRUE : FALSE;
+    return _flags & (UInt32)NSEventModifierFlagCommand ? TRUE : FALSE;
 }
 
 - (BOOL)valid
@@ -269,7 +269,6 @@ static NSString* const MVTCommandKeyString = @"⌘";
                     @(kVK_ANSI_LeftBracket): @"[",
                     @(kVK_ANSI_RightBracket): @"]",
                     @(kVK_ANSI_Backslash): @"\\",
-                    @(kVK_ANSI_RightBracket): @"]",
                     @(kVK_CapsLock): @"Capslock",
                     @(kVK_ANSI_Semicolon): @";",
                     @(kVK_ANSI_Quote): @"'",

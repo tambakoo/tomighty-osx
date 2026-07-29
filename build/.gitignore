@@ -1,2 +1,5 @@
 target
 yoursway-create-dmg
+DerivedData
+XcodeBuild
+*.log

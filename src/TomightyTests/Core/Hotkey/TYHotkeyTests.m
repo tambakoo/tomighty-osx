@@ -21,7 +21,7 @@
     [super setUp];
     // ⇧⌘S
     key = [TYHotkey hotkeyWithCode:0x1
-                              flags:(0 | NSCommandKeyMask | NSShiftKeyMask)];
+                              flags:(0 | NSEventModifierFlagCommand | NSEventModifierFlagShift)];
 }
 
 - (void)tearDown {
@@ -99,7 +99,7 @@
 
 - (void)test_should_report_invalid_if_tab {
     key = [TYHotkey hotkeyWithCode:kVK_Tab
-                              flags:(0 | NSCommandKeyMask)];
+                              flags:(0 | NSEventModifierFlagCommand)];
     XCTAssertFalse(key.valid);
 }
 

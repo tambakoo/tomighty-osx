@@ -1,3 +1,20 @@
+**Fork notes**
+================
+
+*The goal of this fork is to support this project for macOS on apple-silicon (ARM64) architectures*
+
+An unsigned build is available at https://github.com/tambakoo/tomighty-osx/blob/develop/Tomighty-1.2.dmg, the root of this directory.
+
+Since I am not the owner/admin of this project, I cannot distribute the build on their website.
+
+To install the project on an apple-silicon macOS - 
+- Download the raw DMG file by clicking the link above. 
+- Run the build on your mac to add the project to your applications.
+
+*end of fork notes*
+
+
+
 Tomighty for Mac
 ================
 
